@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test:latest
-            docker stop cicd-test || true
-            docker rm cicd-test || true
-            docker run -d --name cicd-test -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test:latest
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:latest
+            docker stop my-go-app || true
+            docker rm my-go-app || true
+            docker run -d --name my-go-app -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:latest
