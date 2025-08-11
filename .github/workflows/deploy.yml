@@ -26,17 +26,17 @@ jobs:
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-go-app:latest
 
   deploy-to-vm:
-  needs: build-and-push
-  runs-on: ubuntu-latest
-  steps:
-    - name: Deploy over SSH
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.VM_HOST }}
-        username: ${{ secrets.VM_USER }}
-        key: ${{ secrets.VM_SSH_KEY }}
-        script: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test:latest
-          docker stop cicd-test || true
-          docker rm cicd-test || true
-          docker run -d --name cicd-test -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test:latest
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test:latest
+            docker stop cicd-test || true
+            docker rm cicd-test || true
+            docker run -d --name cicd-test -p 80:8080 ${{ secrets.DOCKERHUB_USERNAME }}/cicd-test:latest
