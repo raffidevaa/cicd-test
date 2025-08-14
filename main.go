@@ -6,7 +6,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from Go in Docker!!\n")
+	fmt.Fprintf(w, "Hello from Go in Docker with Mr. Jenkins!!\n")
 }
 
 func main() {
